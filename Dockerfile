@@ -1,3 +1,4 @@
+# Author: Tiffany Timbers
 FROM jupyter/minimal-notebook
 
 # install curl needed for installing Poetry
