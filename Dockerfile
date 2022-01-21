@@ -12,7 +12,7 @@ RUN apt update --yes && \
 USER ${NB_UID}
 
 # install cookiecutter and jupyter extensions
-RUN conda install -c -Y conda-forge \
+RUN conda install -c conda-forge --quiet --yes \
   cookiecutter \
   jupyterlab-git \
   jupyterlab-spellchecker \
