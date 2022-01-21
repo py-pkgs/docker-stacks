@@ -1,11 +1,15 @@
 # Author: Tiffany A. Timbers
 FROM jupyter/minimal-notebook
 
+USER root
+
 # install curl needed for installing Poetry
 RUN apt update --yes && \
   apt upgrade --yes && \
   apt install --yes --no-install-recommends \
   curl
+  
+USER ${NB_UID}
 
 # install cookiecutter and jupyter extensions
 RUN conda install -c -Y conda-forge \
