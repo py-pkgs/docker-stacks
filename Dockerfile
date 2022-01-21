@@ -21,3 +21,5 @@ RUN conda install -c conda-forge --quiet --yes \
   jupyter-lsp-python
   
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+
+ENV PATH="$HOME/.poetry/bin:${PATH}"
