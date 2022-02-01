@@ -1,25 +1,54 @@
-# Author: Tiffany A. Timbers
-FROM jupyter/minimal-notebook
+FROM rocker/verse:4.1.1
 
-USER root
+# System dependencies
+RUN apt-get update && apt-get install -y \
+    python3-pip
 
-# install curl needed for installing Poetry
-RUN apt update --yes && \
-  apt upgrade --yes && \
-  apt install --yes --no-install-recommends \
-  curl
-  
-USER ${NB_UID}
+# Install Python dependencies
+RUN pip3 install \
+    jupytext
 
-# install cookiecutter and jupyter extensions
-RUN conda install -c conda-forge --quiet --yes \
-  cookiecutter \
-  jupyterlab-git \
-  jupyterlab-spellchecker \
-  jupytext \
-  jupyterlab-lsp \
-  jupyter-lsp-python
-  
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+# Install LaTeX packages
+RUN tlmgr install amsmath \
+    latex-amsmath-dev \
+    fontspec \
+    tipa \
+    unicode-math \
+    xunicode \
+    kvoptions \
+    ltxcmds \
+    kvsetkeys \
+    etoolbox \
+    xcolor \
+    auxhook \
+    bigintcalc \
+    bitset \
+    etexcmds \
+    gettitlestring \
+    hycolor \
+    hyperref \
+    intcalc \
+    kvdefinekeys \
+    letltxmacro \
+    pdfescape \
+    refcount \
+    rerunfilecheck \
+    stringenc \
+    uniquecounter \
+    zapfding \
+    pdftexcmds \
+    infwarerr \
+    fancyvrb \
+    framed \
+    booktabs \
+    mdwtools \
+    grffile \
+    caption \
+    sourcecodepro \
+    amscls \
+    natbib
 
-ENV PATH="$HOME/.poetry/bin:${PATH}"
+# increase the ImageMagick resource limits
+RUN sed -i 's/256MiB/4GiB/' /etc/ImageMagick-6/policy.xml
+RUN sed -i 's/512MiB/4GiB/' /etc/ImageMagick-6/policy.xml
+RUN sed -i 's/1GiB/4GiB/' /etc/ImageMagick-6/policy.xml
