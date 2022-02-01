@@ -1,25 +1,11 @@
-# Author: Tiffany A. Timbers
-FROM jupyter/minimal-notebook
+FROM continuumio/miniconda3:latest
 
-USER root
-
-# install curl needed for installing Poetry
-RUN apt update --yes && \
-  apt upgrade --yes && \
-  apt install --yes --no-install-recommends \
+RUN apt update -y && \
+  apt upgrade -y && \
+  apt install -y --no-install-recommends \
+  git \
   curl
-  
-USER ${NB_UID}
 
-# install cookiecutter and jupyter extensions
-RUN conda install -c conda-forge --quiet --yes \
-  cookiecutter \
-  jupyterlab-git \
-  jupyterlab-spellchecker \
-  jupytext \
-  jupyterlab-lsp \
-  jupyter-lsp-python
-  
+RUN conda install -c conda-forge -y -q cookiecutter
+
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-
-ENV PATH="$HOME/.poetry/bin:${PATH}"
