@@ -1,22 +1,20 @@
-# docker-stacks
+# py-pkgs Bookdown Docker image
 
-## Usage:
+Docker image to support PDF building of the open-source [py-pkgs book](https://py-pkgs.org).
 
-### Starting the container
+## Usage
 
-1. Copy this [docker-compose.yml](docker-compose.yml) file to the root of your project
+If you'd like develop and build the `py-pkgs` book to PDF:
 
-2. Run `docker-compose up`
+1. Install [Docker](https://docs.docker.com/get-docker/).
+2. Pull the `py-pkgs-bookdown` images: `docker pull tbeuzen/py-pkgs-bookdown:latest`.
+3. Clone the [py-pkgs repository](https://github.com/py-pkgs/py-pkgs) from GitHub: `git clone https://github.com/py-pkgs/py-pkgs.git`.
+4. Make any desired changes to source files.
+5. Build the book using the `build_bookdown.sh` script.
 
-3. Copy the unique URL from the terminal (that looks like this: `http://127.0.0.1:8888/lab?token=45d53a348580b3acfafaa830e99b37d51a501d125663a5c0`)  to a URL in your browser
+  ```bash
+  $ cd py-pkgs
+  $ sh build_bookdown.sh
+  ```
 
-4. Navigate to the `work` directory in Jupyter Lab container
-
-5. Get to work 😜
-
-### Shutting down the container
-(this removes dangling containers which may block the running of other containers in the future)
-
-1. Hit Cntrl + C in the terminal
-
-2. Type `docker-compose down` 
+A fully-rendered PDF version of the book will be built in `py-pkgs/bookdown/_book/`.
