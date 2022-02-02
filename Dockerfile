@@ -8,6 +8,6 @@ RUN apt update -y && \
 
 RUN conda install -c conda-forge -y -q cookiecutter
 
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
-ENV PATH="$HOME/.poetry/bin:${PATH}"
+ENV PATH="$HOME/root/.local/bin:${PATH}"
